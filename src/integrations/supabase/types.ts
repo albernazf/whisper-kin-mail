@@ -14,7 +14,199 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      conversations: {
+        Row: {
+          created_at: string
+          creature_id: string | null
+          id: string
+          last_message_at: string
+          started_by: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          creature_id?: string | null
+          id?: string
+          last_message_at?: string
+          started_by: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          creature_id?: string | null
+          id?: string
+          last_message_at?: string
+          started_by?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_creature_id_fkey"
+            columns: ["creature_id"]
+            isOneToOne: false
+            referencedRelation: "creatures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      creatures: {
+        Row: {
+          backstory: string | null
+          conversation_state: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          name: string
+          user_id: string | null
+        }
+        Insert: {
+          backstory?: string | null
+          conversation_state?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          name: string
+          user_id?: string | null
+        }
+        Update: {
+          backstory?: string | null
+          conversation_state?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          name?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          ai_summary: string | null
+          content: string | null
+          context_notes: string | null
+          conversation_id: string | null
+          created_at: string
+          credits_required: number | null
+          delivery_type: string
+          id: string
+          physical_letter_image_url: string | null
+          sender_type: string
+          status: string | null
+        }
+        Insert: {
+          ai_summary?: string | null
+          content?: string | null
+          context_notes?: string | null
+          conversation_id?: string | null
+          created_at?: string
+          credits_required?: number | null
+          delivery_type: string
+          id?: string
+          physical_letter_image_url?: string | null
+          sender_type: string
+          status?: string | null
+        }
+        Update: {
+          ai_summary?: string | null
+          content?: string | null
+          context_notes?: string | null
+          conversation_id?: string | null
+          created_at?: string
+          credits_required?: number | null
+          delivery_type?: string
+          id?: string
+          physical_letter_image_url?: string | null
+          sender_type?: string
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          assigned_mailing_address: string | null
+          created_at: string
+          credits_digital: number | null
+          credits_physical: number | null
+          daily_digital_replies_used: number | null
+          email: string
+          id: string
+          last_digital_reply_date: string | null
+          name: string | null
+          parent_email: string | null
+          physical_address: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          assigned_mailing_address?: string | null
+          created_at?: string
+          credits_digital?: number | null
+          credits_physical?: number | null
+          daily_digital_replies_used?: number | null
+          email: string
+          id?: string
+          last_digital_reply_date?: string | null
+          name?: string | null
+          parent_email?: string | null
+          physical_address?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          assigned_mailing_address?: string | null
+          created_at?: string
+          credits_digital?: number | null
+          credits_physical?: number | null
+          daily_digital_replies_used?: number | null
+          email?: string
+          id?: string
+          last_digital_reply_date?: string | null
+          name?: string | null
+          parent_email?: string | null
+          physical_address?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number | null
+          created_at: string
+          credit_type: string
+          credits_purchased: number | null
+          id: string
+          stripe_payment_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string
+          credit_type: string
+          credits_purchased?: number | null
+          id?: string
+          stripe_payment_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string
+          credit_type?: string
+          credits_purchased?: number | null
+          id?: string
+          stripe_payment_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
