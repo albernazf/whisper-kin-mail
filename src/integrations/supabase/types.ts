@@ -79,6 +79,45 @@ export type Database = {
         }
         Relationships: []
       }
+      credit_purchases: {
+        Row: {
+          amount_paid: number
+          completed_at: string | null
+          created_at: string
+          credit_type: string
+          credits_purchased: number
+          currency: string | null
+          id: string
+          status: string | null
+          stripe_session_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount_paid: number
+          completed_at?: string | null
+          created_at?: string
+          credit_type: string
+          credits_purchased: number
+          currency?: string | null
+          id?: string
+          status?: string | null
+          stripe_session_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount_paid?: number
+          completed_at?: string | null
+          created_at?: string
+          credit_type?: string
+          credits_purchased?: number
+          currency?: string | null
+          id?: string
+          status?: string | null
+          stripe_session_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           ai_summary: string | null
@@ -88,8 +127,11 @@ export type Database = {
           created_at: string
           credits_required: number | null
           delivery_type: string
+          generation_cost: number | null
           id: string
+          mailed_at: string | null
           physical_letter_image_url: string | null
+          physical_mail_status: string | null
           sender_type: string
           status: string | null
         }
@@ -101,8 +143,11 @@ export type Database = {
           created_at?: string
           credits_required?: number | null
           delivery_type: string
+          generation_cost?: number | null
           id?: string
+          mailed_at?: string | null
           physical_letter_image_url?: string | null
+          physical_mail_status?: string | null
           sender_type: string
           status?: string | null
         }
@@ -114,8 +159,11 @@ export type Database = {
           created_at?: string
           credits_required?: number | null
           delivery_type?: string
+          generation_cost?: number | null
           id?: string
+          mailed_at?: string | null
           physical_letter_image_url?: string | null
+          physical_mail_status?: string | null
           sender_type?: string
           status?: string | null
         }
@@ -135,6 +183,7 @@ export type Database = {
           created_at: string
           credits_digital: number | null
           credits_physical: number | null
+          daily_digital_replies_reset_date: string | null
           daily_digital_replies_used: number | null
           email: string
           id: string
@@ -150,6 +199,7 @@ export type Database = {
           created_at?: string
           credits_digital?: number | null
           credits_physical?: number | null
+          daily_digital_replies_reset_date?: string | null
           daily_digital_replies_used?: number | null
           email: string
           id?: string
@@ -165,6 +215,7 @@ export type Database = {
           created_at?: string
           credits_digital?: number | null
           credits_physical?: number | null
+          daily_digital_replies_reset_date?: string | null
           daily_digital_replies_used?: number | null
           email?: string
           id?: string
@@ -212,7 +263,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_use_free_digital_reply: {
+        Args: { user_uuid: string }
+        Returns: boolean
+      }
+      reset_daily_digital_replies: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
